@@ -34,7 +34,6 @@ router.post('/location', async function(req, res, next) {
         res.send('ERROR')
     }
 
-    
 });
 
 module.exports = router;
