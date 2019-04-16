@@ -9,16 +9,35 @@ const axios = require('axios');
 // const sys = require( "sys" );
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+    res.render('index', {
+        title: 'Express'
+    });
 });
 
-router.post('/location', async function(req, res, next) {
+router.get('/locate', async function (req, res) {
     let mapUrl = "https://www.google.com/maps/place/";
 
-    const latitude = req.body.latitude;
-    const longitude = req.body.longitude;
+    const latitude = req.query.latitude;
+    const longitude = req.query.longitude;
 
+    mapUrl += latitude + '+' + longitude;
+    console.log(mapUrl)
+
+    res.render('convert', {
+        latitude: latitude,
+        longitude: longitude
+    });
+
+});
+
+router.get('/axios-location', async function (req, res) {
+    let mapUrl = "https://www.google.com/maps/place/";
+
+    const latitude = req.query.latitude;
+    const longitude = req.query.longitude;
+
+    console.log(mapUrl)
     mapUrl += latitude + '+' + longitude;
     console.log(mapUrl);
 
@@ -26,14 +45,13 @@ router.post('/location', async function(req, res, next) {
         url: mapUrl
     });
 
-    if(result != null) {
+    if (result != null) {
         console.log('success')
         res.send('OK')
     } else {
         console.log('fail')
         res.send('ERROR')
     }
-
 });
 
 module.exports = router;

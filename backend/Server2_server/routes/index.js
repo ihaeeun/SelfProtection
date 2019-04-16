@@ -9,7 +9,9 @@ router.get('/', function(req, res, next) {
 router.post('/url', function(req, res, next) {
   const mapUrl = req.body.url;
   console.log(req.body.url);
-  res.redirect(mapUrl);
+  // res.redirect(mapUrl);
+  res.render('index', { title: 'Express' });
+
 });
 
 module.exports = router;
