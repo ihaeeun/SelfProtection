@@ -7,10 +7,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/url', function(req, res, next) {
-  const mapUrl = req.body.url;
-  console.log(req.body.url);
+  // const mapUrl = req.body.url;
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
+
+  // console.log(req.body.url);
   // res.redirect(mapUrl);
-  res.render('index', { title: 'Express' });
+
+  res.render('convert', {
+    latitude: latitude,
+    longitude: longitude
+  });
 
 });
 

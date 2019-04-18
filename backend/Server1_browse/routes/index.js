@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-// const jsdom = require('jsdom');
-// const {JSDOM} = jsdom;
-
-// const exec = require( "child_process" ).exec;
-// const sys = require( "sys" );
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index', {
@@ -37,17 +31,21 @@ router.get('/axios-location', async function (req, res) {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
 
-    console.log(mapUrl)
     mapUrl += latitude + '+' + longitude;
     console.log(mapUrl);
 
     const result = await axios.post('http://localhost:3001/url', {
-        url: mapUrl
+        // url: mapUrl
+        latitude: latitude,
+        longitude: longitude
     });
+
+    console.log("receive");
 
     if (result != null) {
         console.log('success')
-        res.send('OK')
+        // res.send('OK')
+        res.render("convert", {latitude: latitude, longitude: longitude});
     } else {
         console.log('fail')
         res.send('ERROR')
